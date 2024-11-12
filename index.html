@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duck Clicker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <section>
+        <div class="main">
+            <div class="left">
+                <h3>Quacks: <span class="Ducks-Quacked">0</span> </h3>
+                <img src="./Assets/Duck.png" alt="" srcset="" class="Duck-image" onclick="incrementQuacks()" draggable="false">
+            </div>
+            <div class="right">
+
+
+                <div class="upgrade" onclick="buyClicker()">
+                    <div class="left-section">
+                        <img src="./Assets/Cursor.png" alt="" class="upgrade-img">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Clicker</h4>
+                        <div class="cost-info">
+                            <p>Cost: <span class="clicker-cost">10</span></p>
+                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Level <span class="clicker-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <span class="info-size"><p> +<span class="clicker-increase">1</span> quacks<br> per click</p></span>
+
+                    </div>
+                </div>
+
+
+                <div class="upgrade" onclick="buyBread()">
+                    <div class="left-section">
+                        <img src="./Assets/Bread.png" alt="" class="upgrade-img">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Bread</h4>
+                        <div class="cost-info">
+                            <p>Cost: <span class="bread-cost">150</span></p>
+                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Level <span class="bread-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <span class="info-size"><p> +<span class="bread-increase">3</span> quacks<br> per second</p></span>
+
+                    </div>
+                </div>
+
+
+                <div class="upgrade" onclick="buyBakery()">
+                    <div class="left-section">
+                        <img src="./Assets/Bakery.png" alt="" class="upgrade-img">
+                    </div>
+                    <div class="mid-section">
+                        <h4>Bakery</h4>
+                        <div class="cost-info">
+                            <p>Cost: <span class="bakery-cost">1000</span></p>
+                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
+                        </div>
+                    </div>
+                    <div class="right-section">
+                        Level <span class="bakery-level">0</span>
+                    </div>
+                    <div class="next-level-info">
+                        <span class="info-size"><p> +<span class="bakery-increase">10</span> quacks<br> per second</p></span>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="statistics">
+            <div class="texts">
+                <p>QPC: <span id="qpc-text">1</span></p>
+                <p>QPS: <span id="qps-text">0</span></p>
+            </div>
+        </div>
+
+    </section>
+
+    <script src="index.js"></script>
+</body>
+</html>

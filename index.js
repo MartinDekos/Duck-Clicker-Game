@@ -48,7 +48,7 @@ const upgrades = [
         parsedIncrease: parseFloat(document.querySelector('.feeder-increase').innerHTML),
         level: document.querySelector('.feeder-level'),
         QuackMultiplier: 1.5,
-        CostMultiplier: 1.25,
+        CostMultiplier: 2.5,
     },
 ]
 

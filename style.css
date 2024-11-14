@@ -36,6 +36,14 @@ body {
     text-shadow: 2px 2px 3px rgb(90, 90, 90);
 }
 
+.right {
+    max-height: 390px;
+    width: 420px;
+    padding: 20px 5px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
 
 .info-size{
     font-size: 15px;
@@ -214,4 +222,20 @@ body {
         transform: translateY(-50px);
         opacity: 0;
     }
+}
+
+::-webkit-scrollbar {
+    width: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
 }

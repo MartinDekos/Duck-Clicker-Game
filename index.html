@@ -15,94 +15,34 @@
                     <img src="./Assets/Duck.png" alt="" srcset="" class="Duck-image" onclick="incrementQuacks(event)" draggable="false">
                 </div>
             </div>
-            <div class="right">
 
-
-                <div class="upgrade" onclick="buyUpgrade('clicker')">
+            <script id="upgrade-template" type="text/template">
+                <div class="upgrade" onclick="buyUpgrade('{{name}}')">
                     <div class="left-section">
-                        <img src="./Assets/Cursor.png" alt="" class="upgrade-img">
+                        <img src="{{image}}" alt="" class="upgrade-img">
                     </div>
                     <div class="mid-section">
-                        <h4>Clicker</h4>
+                        <h4>{{name}}</h4>
                         <div class="cost-info">
                             <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
-                            <p><span class="clicker-cost">10</span></p>
+                            <p><span class="{{name}}-cost">{{cost}}</span></p>
                         </div>
                     </div>
                     <div class="right-section">
-                        Level <span class="clicker-level">0</span>
+                        Level <span class="{{name}}-level">0</span>
                     </div>
                     <div class="next-level-info">
-                        <span class="info-size"><p> +<span class="clicker-increase">1</span> quacks<br> per click</p></span>
+                        <span class="info-size"><p> +<span class="{{name}}-increase">{{increase}}</span> quacks<br> per click</p></span>
 
                     </div>
                 </div>
+            </script>
 
-
-                <div class="upgrade" onclick="buyUpgrade('bread')">
-                    <div class="left-section">
-                        <img src="./Assets/Bread.png" alt="" class="upgrade-img">
-                    </div>
-                    <div class="mid-section">
-                        <h4>Bread</h4>
-                        <div class="cost-info">
-                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
-                            <p><span class="bread-cost">150</span></p>
-                        </div>
-                    </div>
-                    <div class="right-section">
-                        Level <span class="bread-level">0</span>
-                    </div>
-                    <div class="next-level-info">
-                        <span class="info-size"><p> +<span class="bread-increase">3</span> quacks<br> per second</p></span>
-
-                    </div>
-                </div>
-
-
-                <div class="upgrade" onclick="buyUpgrade('bakery')">
-                    <div class="left-section">
-                        <img src="./Assets/Bakery.png" alt="" class="upgrade-img">
-                    </div>
-                    <div class="mid-section">
-                        <h4>Bakery</h4>
-                        <div class="cost-info">
-                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
-                            <p><span class="bakery-cost">1000</span></p>
-                        </div>
-                    </div>
-                    <div class="right-section">
-                        Level <span class="bakery-level">0</span>
-                    </div>
-                    <div class="next-level-info">
-                        <span class="info-size"><p> +<span class="bakery-increase">10</span> quacks<br> per second</p></span>
-
-                    </div>
-                </div>
-
-
-                <div class="upgrade" onclick="buyUpgrade('feeder')">
-                    <div class="left-section">
-                        <img src="./Assets/Feeder.png" alt="" class="upgrade-img">
-                    </div>
-                    <div class="mid-section">
-                        <h4>Feeder</h4>
-                        <div class="cost-info">
-                            <img src="./Assets/Duck.png" alt="" srcset="" class="duck-img">
-                            <p><span class="feeder-cost">1500</span></p>
-                        </div>
-                    </div>
-                    <div class="right-section">
-                        Level <span class="feeder-level">0</span>
-                    </div>
-                    <div class="next-level-info">
-                        <span class="info-size"><p> +<span class="feeder-increase">20</span> quacks<br> per second</p></span>
-
-                    </div>
-                </div>
-
+            <div class="right" id="upgrades-container">
 
             </div>
+
+
         </div>
 
         <div class="statistics">
@@ -123,6 +63,6 @@
         </div>
     </section>
 
-    <script src="index.js"></script>
+    <script type="module" src="index.js"></script>
 </body>
 </html>

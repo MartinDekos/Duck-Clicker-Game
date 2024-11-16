@@ -88,7 +88,7 @@ body {
     position: relative;
     margin-bottom: 20px;
     z-index: 1;
-    background-image: url('./Assets/FrameBackground.png');
+    background-image: url('https://username.github.io/repository-name/Assets/FrameBackground.png');
     background-size: cover;
     background-position: center;
 }
@@ -153,7 +153,7 @@ body {
     border-top-left-radius: 10px;
     left: 50%;
     transform: translate(-105%);
-    background-image: url('/Assets/StatBackground.png');
+    background-image: url('https://username.github.io/repository-name/Assets/StatBackground.png');
     background-size: cover;
     background-position: center;
 }

@@ -12,16 +12,16 @@ let qpc = 1;
 let qps = 0;
 
 
-const bgm = new Audio('/Assets/Audio/BGM.mp3')
+const bgm = new Audio('Assets/Audio/BGM.mp3')
 bgm.volume = 0.05
-const clickingSound = new Audio('/Assets/Audio/Click.mp3')
+const clickingSound = new Audio('Assets/Audio/Click.mp3')
 clickingSound.volume = 0.05
-const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
+const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
 
 
 function incrementQuacks(event)
 {
-    const clickingSound = new Audio('/Assets/Audio/Click.mp3')
+    const clickingSound = new Audio('Assets/Audio/Click.mp3')
     clickingSound.play()
 
 
@@ -58,7 +58,7 @@ function buyUpgrade(upgrade)
 
     if (parsedQuack >= matchedUpgrade.parsedCost)
     {
-        const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
+        const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
         upgradeSound.volume = 0.1
         upgradeSound.play()
 
@@ -70,7 +70,7 @@ function buyUpgrade(upgrade)
 
         if ( index !== -1)
         {
-            upgradeDiv.style.cssText = `border-color: #722F37; background-image: url('/Assets/FrameBackground.png');`;
+            upgradeDiv.style.cssText = `border-color: #722F37; background-image: url('Assets/FrameBackground.png');`;
             nextLevelDiv.style.cssText = `background-color: #2c2c2c; font-weight: normal;`;
             matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier; 
             matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
@@ -87,11 +87,11 @@ function buyUpgrade(upgrade)
         index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
         if (index !== -1)
         {
-            upgradeDiv.style.cssText = `border-color: orange; background-image: url('/Assets/FrameBackgroundUpgrade.png');`;
+            upgradeDiv.style.cssText = `border-color: orange; background-image: url('Assets/FrameBackgroundUpgrade.png');`;
             nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold;`;
             nextLevelP.innerText = matchedUpgrade.powerUps[index].description
             nextLevelDiv.querySelector(`.info-size`).style.display = 'none';
-            matchedUpgrade.parsedCost = Math.round(matchedUpgrade.parsedCost * 2.5 * 1.004 ** parseFloat(matchedUpgrade.level.innerHTML));
+            matchedUpgrade.parsedCost = Math.round(matchedUpgrade.parsedCost * 2 * 1.004 ** parseFloat(matchedUpgrade.level.innerHTML));
             matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
         }
         else 

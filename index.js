@@ -1,4 +1,4 @@
-import { upgrades } from "./Constants/upgrades.js"
+import { powerUpIntervals, upgrades } from "./Constants/upgrades.js"
 
 let duck = document.querySelector('.Ducks-Quacked')
 let parsedQuack = parseFloat(duck.innerHTML)
@@ -12,9 +12,19 @@ let qpc = 1;
 let qps = 0;
 
 
+const bgm = new Audio('/Assets/Audio/BGM.mp3')
+bgm.volume = 0.05
+const clickingSound = new Audio('/Assets/Audio/Click.mp3')
+clickingSound.volume = 0.05
+const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
+
 
 function incrementQuacks(event)
 {
+    const clickingSound = new Audio('/Assets/Audio/Click.mp3')
+    clickingSound.play()
+
+
     duck.innerHTML = Math.round(parsedQuack += qpc)
 
     const x = event.offsetX
@@ -42,14 +52,56 @@ function buyUpgrade(upgrade)
         if (u.name === upgrade) return u
     })
 
+    const upgradeDiv = document.getElementById(`${matchedUpgrade.name}-upgrade`)
+    const nextLevelDiv = document.getElementById(`${matchedUpgrade.name}-next-level`)
+    const nextLevelP = document.getElementById(`${matchedUpgrade.name}-next-p`)
+
     if (parsedQuack >= matchedUpgrade.parsedCost)
     {
+        const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
+        upgradeSound.volume = 0.1
+        upgradeSound.play()
+
         duck.innerHTML = Math.round(parsedQuack -= matchedUpgrade.parsedCost);
+        nextLevelP.innerHTML = '';
+        matchedUpgrade.increase.innerHTML = '';
+
+        let index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
+
+        if ( index !== -1)
+        {
+            upgradeDiv.style.cssText = `border-color: #722F37; background-image: url('/Assets/FrameBackground.png');`;
+            nextLevelDiv.style.cssText = `background-color: #2c2c2c; font-weight: normal;`;
+            matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier; 
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
+            nextLevelDiv.querySelector(`.info-size`).style.display = 'none';
+
+            if ( matchedUpgrade.name === 'clicker')
+            {
+                qpc *= matchedUpgrade.powerUps[index].multiplier  
+            }
+        }
+
         matchedUpgrade.level.innerHTML ++
-        matchedUpgrade.parsedIncrease = parseFloat((matchedUpgrade.parsedIncrease * matchedUpgrade.QuackMultiplier).toFixed(2))
-        matchedUpgrade.increase.innerHTML = matchedUpgrade.parsedIncrease
-        matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier;
-        matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost)
+        
+        index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
+        if (index !== -1)
+        {
+            upgradeDiv.style.cssText = `border-color: orange; background-image: url('/Assets/FrameBackgroundUpgrade.png');`;
+            nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold;`;
+            nextLevelP.innerText = matchedUpgrade.powerUps[index].description
+            nextLevelDiv.querySelector(`.info-size`).style.display = 'none';
+            matchedUpgrade.parsedCost = Math.round(matchedUpgrade.parsedCost * 2.5 * 1.004 ** parseFloat(matchedUpgrade.level.innerHTML));
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
+        }
+        else 
+        {
+            nextLevelDiv.querySelector('.info-size').style.display = 'block';
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier);
+            matchedUpgrade.parsedIncrease = parseFloat((matchedUpgrade.parsedIncrease * matchedUpgrade.QuackMultiplier).toFixed(2))
+        }
+
+         matchedUpgrade.increase.innerHTML = matchedUpgrade.parsedIncrease;
 
         if (matchedUpgrade.name === 'clicker')
         {
@@ -102,9 +154,11 @@ setInterval(() =>
     duck.innerHTML = Math.round(parsedQuack)
     qpcText.innerHTML = Math.round(qpc)
     qpsText.innerHTML = Math.round(qps)
+    bgm.play()
 }, 100)
 
 window.incrementQuacks = incrementQuacks
 window.buyUpgrade = buyUpgrade
 window.save = save
 window.load = load
+

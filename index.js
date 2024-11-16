@@ -13,7 +13,7 @@ let qps = 0;
 
 
 const bgm = new Audio('Assets/Audio/BGM.mp3')
-bgm.volume = 0.05
+bgm.volume = 0.01
 const clickingSound = new Audio('Assets/Audio/Click.mp3')
 clickingSound.volume = 0.05
 const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
@@ -48,9 +48,7 @@ const timeout = (div) => {
 
 function buyUpgrade(upgrade)
 {
-    const matchedUpgrade = upgrades.find((u) => {
-        if (u.name === upgrade) return u
-    })
+    const matchedUpgrade = upgrades.find((u) => u.name === upgrade);
 
     const upgradeDiv = document.getElementById(`${matchedUpgrade.name}-upgrade`)
     const nextLevelDiv = document.getElementById(`${matchedUpgrade.name}-next-level`)
@@ -99,9 +97,18 @@ function buyUpgrade(upgrade)
             nextLevelDiv.querySelector('.info-size').style.display = 'block';
             matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier);
             matchedUpgrade.parsedIncrease = parseFloat((matchedUpgrade.parsedIncrease * matchedUpgrade.QuackMultiplier).toFixed(2))
+
+            if (matchedUpgrade.name === 'clicker') {
+                nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per click`;
+                qpc += matchedUpgrade.parsedIncrease; // Update QPC
+            } else {
+                nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per second`;
+                qps += matchedUpgrade.parsedIncrease; // Update QPS
+            }
         }
 
          matchedUpgrade.increase.innerHTML = matchedUpgrade.parsedIncrease;
+
 
         if (matchedUpgrade.name === 'clicker')
         {

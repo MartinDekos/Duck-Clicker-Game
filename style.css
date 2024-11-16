@@ -82,7 +82,7 @@ body {
     justify-content: space-between;
     width: 350px;
     height: 80px;
-    border: 5px solid #722F37;
+    border: 5px solid white;
     padding: 15px 20px;
     border-radius: 10px;
     position: relative;
@@ -148,14 +148,11 @@ body {
     bottom: 0;
     width: 500px;
     padding: 10px;
-    border: 5px #722F37 solid;
+    border: 5px white solid;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     left: 50%;
     transform: translate(-105%);
-    background-image: url('https://username.github.io/repository-name/Assets/StatBackground.png');
-    background-size: cover;
-    background-position: center;
 }
 
 .texts {

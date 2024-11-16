@@ -70,7 +70,7 @@ function buyUpgrade(upgrade)
 
         if ( index !== -1)
         {
-            upgradeDiv.style.cssText = `border-color: #722F37; background-image: url('https://username.github.io/repository-name/Assets/FrameBackground.png');`;
+            upgradeDiv.style.cssText = `border-color: white`;
             nextLevelDiv.style.cssText = `background-color: #2c2c2c; font-weight: normal;`;
             matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier; 
             matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
@@ -87,7 +87,7 @@ function buyUpgrade(upgrade)
         index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
         if (index !== -1)
         {
-            upgradeDiv.style.cssText = `border-color: orange; background-image: url('https://username.github.io/repository-name/Assets/FrameBackgroundUpgrade.png');`;
+            upgradeDiv.style.cssText = `border-color: orange;`;
             nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold;`;
             nextLevelP.innerText = matchedUpgrade.powerUps[index].description
             nextLevelDiv.querySelector(`.info-size`).style.display = 'none';

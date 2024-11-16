@@ -87,7 +87,7 @@ function buyUpgrade(upgrade)
         index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
         if (index !== -1)
         {
-            upgradeDiv.style.cssText = `border-color: orange; background-image: url('./Assets/FrameBackgroundUpgrade.png');`;
+            upgradeDiv.style.cssText = `border-color: orange; background-image: url('https://username.github.io/repository-name/Assets/FrameBackground.png');`;
             nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold;`;
             nextLevelP.innerText = matchedUpgrade.powerUps[index].description
             nextLevelDiv.querySelector(`.info-size`).style.display = 'none';

@@ -74,6 +74,7 @@ export const upgrades = [
                 multiplier: 5,
             },
         ],
+        power: 0,
         QuackMultiplier: 1.1,
         CostMultiplier: 1.5,
     },
@@ -102,6 +103,7 @@ export const upgrades = [
                 multiplier: 5,
             },
         ],
+        power: 0,
         QuackMultiplier: 1.1,
         CostMultiplier: 1.5,
     },
@@ -130,11 +132,10 @@ export const upgrades = [
                 multiplier: 5,
             },
         ],
+        power: 0,
         QuackMultiplier: 1.5,
         CostMultiplier: 2.5,
     },
 ]
-
-console.log(upgrades[0].name)
 
 export const powerUpIntervals = [10, 20, 30, 50, 70, 100, 150, 200, 250, 300]

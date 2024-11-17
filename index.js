@@ -13,9 +13,9 @@ let qps = 0;
 
 
 const bgm = new Audio('Assets/Audio/BGM.mp3')
-bgm.volume = 0.01
+bgm.volume = 0.1
 const clickingSound = new Audio('Assets/Audio/Click.mp3')
-clickingSound.volume = 0.05
+clickingSound.volume = 0.1
 const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
 
 
@@ -48,7 +48,9 @@ const timeout = (div) => {
 
 function buyUpgrade(upgrade)
 {
-    const matchedUpgrade = upgrades.find((u) => u.name === upgrade);
+    const matchedUpgrade = upgrades.find((u) => {
+        if (u.name === upgrade) return u
+    })
 
     const upgradeDiv = document.getElementById(`${matchedUpgrade.name}-upgrade`)
     const nextLevelDiv = document.getElementById(`${matchedUpgrade.name}-next-level`)
@@ -56,13 +58,11 @@ function buyUpgrade(upgrade)
 
     if (parsedQuack >= matchedUpgrade.parsedCost)
     {
-        const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
+        const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
         upgradeSound.volume = 0.1
         upgradeSound.play()
 
         duck.innerHTML = Math.round(parsedQuack -= matchedUpgrade.parsedCost);
-        nextLevelP.innerHTML = '';
-        matchedUpgrade.increase.innerHTML = '';
 
         let index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
 
@@ -70,53 +70,49 @@ function buyUpgrade(upgrade)
         {
             upgradeDiv.style.cssText = `border-color: white`;
             nextLevelDiv.style.cssText = `background-color: #2c2c2c; font-weight: normal;`;
-            matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier; 
-            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
-            nextLevelDiv.querySelector(`.info-size`).style.display = 'none';
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier)
 
-            if ( matchedUpgrade.name === 'clicker')
-            {
-                qpc *= matchedUpgrade.powerUps[index].multiplier  
-            }
+           if (matchedUpgrade.name === 'clicker') 
+           {
+            qpc *= matchedUpgrade.powerUps[index].multiplier
+            nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per click`
+           } else
+           {
+            qps -= matchedUpgrade.power
+            matchedUpgrade.power *= matchedUpgrade.powerUps[index].multiplier
+            qps += matchedUpgrade.power
+            nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per second`
+           }
         }
 
         matchedUpgrade.level.innerHTML ++
         
         index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
+
         if (index !== -1)
         {
             upgradeDiv.style.cssText = `border-color: orange;`;
             nextLevelDiv.style.cssText = `background-color: #CC4500; font-weight: bold;`;
             nextLevelP.innerText = matchedUpgrade.powerUps[index].description
-            nextLevelDiv.querySelector(`.info-size`).style.display = 'none';
-            matchedUpgrade.parsedCost = Math.round(matchedUpgrade.parsedCost * 2 * 1.004 ** parseFloat(matchedUpgrade.level.innerHTML));
-            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost);
-        }
-        else 
+
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost * 2 * 1.004 ** parseFloat(matchedUpgrade.level.innerHTML))
+        } else 
         {
-            nextLevelDiv.querySelector('.info-size').style.display = 'block';
-            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier);
+            matchedUpgrade.cost.innerHTML = Math.round(matchedUpgrade.parsedCost *= matchedUpgrade.CostMultiplier)
             matchedUpgrade.parsedIncrease = parseFloat((matchedUpgrade.parsedIncrease * matchedUpgrade.QuackMultiplier).toFixed(2))
 
-            if (matchedUpgrade.name === 'clicker') {
-                nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per click`;
-                qpc += matchedUpgrade.parsedIncrease; // Update QPC
-            } else {
-                nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per second`;
-                qps += matchedUpgrade.parsedIncrease; // Update QPS
-            }
+            if (matchedUpgrade.name === 'clicker') nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per click`
+            else nextLevelP.innerHTML = `+${matchedUpgrade.parsedIncrease} quacks per second`
         }
-
-         matchedUpgrade.increase.innerHTML = matchedUpgrade.parsedIncrease;
-
-
         if (matchedUpgrade.name === 'clicker')
         {
             qpc += matchedUpgrade.parsedIncrease
         }
         else 
         {
-            qps += matchedUpgrade.parsedIncrease
+            qps -= matchedUpgrade.power
+            matchedUpgrade.power += matchedUpgrade.parsedIncrease
+            qps += matchedUpgrade.power
         }
     }
 }

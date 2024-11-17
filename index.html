@@ -3,23 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Duck Clicker</title>
     <link rel="stylesheet" href="style.css">
+    <title>Duck Clicker</title>
 </head>
 <body>
     <section>
         <div class="main">
             <div class="left">
-                <h3>Quacks<br><span class="Ducks-Quacked orange-text">0</span> </h3>
+                <h3>Quacks<br><span class="Ducks-Quacked orange-text">0</span></h3>
                 <div class="duck-img-container">
-                    <img src="./Assets/Duck.png" alt="" srcset="" class="Duck-image" onclick="incrementQuacks(event)" draggable="false">
+                    <img 
+                    src="./Assets/Duck.png" 
+                    alt="" 
+                    class="Duck-image" 
+                    onclick="incrementQuacks(event)" 
+                    draggable="false"
+                    />
                 </div>
             </div>
 
             <script id="upgrade-template" type="text/template">
                 <div class="upgrade" onclick="buyUpgrade('{{name}}')" id="{{name}}-upgrade">
                     <div class="left-section">
-                        <img src="{{image}}" alt="" class="upgrade-img">
+                        <img 
+                        src="{{image}}" 
+                        alt="" 
+                        class="upgrade-img"
+                        />
                     </div>
                     <div class="mid-section">
                         <h4>{{name}}</h4>
@@ -28,12 +38,11 @@
                             <p><span class="{{name}}-cost">{{cost}}</span></p>
                         </div>
                     </div>
-                    <div class="right-section">
-                        Level <span class="{{name}}-level">0</span>
-                    </div>
+                    <div class="right-section">Level <span class="{{name}}-level">0</span></div>
+
                     <div class="next-level-info" id="{{name}}-next-level">
-                        <p id="{{name}}-next-p"></p>
-                        <span class="info-size"><p> +<span class="{{name}}-increase">{{increase}}</span> quacks<br> per click
+                        <p id="{{name}}-next-p">
+                        +<span class="{{name}}-increase">{{increase}}</span> quacks <br /> per click
                         </p>
                     </div>
                 </div>

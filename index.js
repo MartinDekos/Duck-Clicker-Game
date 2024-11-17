@@ -58,7 +58,7 @@ function buyUpgrade(upgrade)
 
     if (parsedQuack >= matchedUpgrade.parsedCost)
     {
-        const upgradeSound = new Audio('/Assets/Audio/Upgrade.mp3')
+        const upgradeSound = new Audio('Assets/Audio/Upgrade.mp3')
         upgradeSound.volume = 0.1
         upgradeSound.play()
 

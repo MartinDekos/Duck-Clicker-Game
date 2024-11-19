@@ -1,4 +1,4 @@
-import { powerUpIntervals, upgrades } from "./Constants/upgrades.js"
+import { powerUpIntervals, upgrades, } from "./Constants/upgrades.js"
 
 let duck = document.querySelector('.Ducks-Quacked')
 let parsedQuack = parseFloat(duck.innerHTML)
@@ -7,6 +7,11 @@ let qpcText = document.getElementById("qpc-text")
 let qpsText = document.getElementById("qps-text")
 
 let DuckImgContainer = document.querySelector('.duck-img-container')
+
+
+let upgradesNavButton = document.getElementById('upgrades-nav-button')
+let skillsNavButton = document.getElementById('skills-nav-button')
+let artifactsNavButton = document.getElementById('artifacts-nav-button')
 
 let qpc = 1;
 let qps = 0;
@@ -150,7 +155,6 @@ function load()
     duck.innerHTML = Math.round(parsedQuack)
 }
 
-
 setInterval(() => 
 {
     parsedQuack += qps / 10
@@ -160,8 +164,43 @@ setInterval(() =>
     bgm.play()
 }, 100)
 
+skillsNavButton.addEventListener("click", function() {
+    const upgradeContainers = document.querySelectorAll(".upgrade")
+
+    upgradeContainers.forEach((container) => {
+        if (container.classList.contains('type-skill')) container.style.display = "flex"
+        else container.style.display = "none"
+    })
+})
+
+upgradesNavButton.addEventListener("click", function() {
+    const upgradeContainers = document.querySelectorAll(".upgrade")
+
+    upgradeContainers.forEach((container) => {
+        if (container.classList.contains('type-upgrade')) container.style.display = "flex"
+        else container.style.display = "none"
+    })
+})
+
+artifactsNavButton.addEventListener("click", function() {
+    const upgradeContainers = document.querySelectorAll(".upgrade")
+
+    upgradeContainers.forEach((container) => {
+        if (container.classList.contains('type-artifact')) container.style.display = "flex"
+        else container.style.display = "none"
+    })
+})
+let isMuted = false;
+function mute()
+{
+    isMuted = !isMuted;
+    bgm.volume = isMuted ? 0 : 0.1; 
+}
+
+
 window.incrementQuacks = incrementQuacks
 window.buyUpgrade = buyUpgrade
 window.save = save
 window.load = load
+window.mute = mute
 

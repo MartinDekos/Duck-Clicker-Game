@@ -1,4 +1,6 @@
 import { powerUpIntervals, upgrades, } from "./Constants/upgrades.js"
+import { defaultSkillValues, defaultArtifactValues, defaultUpgradeValues } from "./Constants/defaultValues.js"
+import { nf } from "./utils/formatter.js"
 
 let duck = document.querySelector('.Ducks-Quacked')
 let parsedQuack = parseFloat(duck.innerHTML)
@@ -12,6 +14,9 @@ let DuckImgContainer = document.querySelector('.duck-img-container')
 let upgradesNavButton = document.getElementById('upgrades-nav-button')
 let skillsNavButton = document.getElementById('skills-nav-button')
 let artifactsNavButton = document.getElementById('artifacts-nav-button')
+
+let prestigeButton = document.querySelector('.prestige-button')
+let relic = document.getElementById("relic")
 
 let qpc = 1;
 let qps = 0;
@@ -30,7 +35,7 @@ function incrementQuacks(event)
     clickingSound.play()
 
 
-    duck.innerHTML = Math.round(parsedQuack += qpc)
+    duck.innerHTML = nf(parsedQuack += qpc)
 
     const x = event.offsetX
     const y = event.offsetY
@@ -67,7 +72,7 @@ function buyUpgrade(upgrade)
         upgradeSound.volume = 0.1
         upgradeSound.play()
 
-        duck.innerHTML = Math.round(parsedQuack -= matchedUpgrade.parsedCost);
+        duck.innerHTML = nf(parsedQuack -= matchedUpgrade.parsedCost);
 
         let index = powerUpIntervals.indexOf(parseFloat(matchedUpgrade.level.innerHTML))
 
@@ -155,13 +160,45 @@ function load()
     duck.innerHTML = Math.round(parsedQuack)
 }
 
+function prestige()
+{
+    upgrades.map((upgrade) => {
+        const matchedUpgrade = defaultUpgradeValues.find((u) => { if (upgrade.name === u.name) return u})
+        upgrade.parsedCost = matchedUpgrade.cost
+        upgrade.parsedIncrease = matchedUpgrade.increase
+        upgrade.level.innerHTML = 0
+        upgrade.cost.innerHTML = matchedUpgrade.cost
+        upgrade.increase.innerHTML = matchedUpgrade.increase 
+        const upgradeDiv = document.getElementById(`${matchedUpgrade.name}-upgrade`)
+        const nextLevelDiv = document.getElementById(`${matchedUpgrade.name}-next-level`)
+        const nextLevelP = document.getElementById(`${matchedUpgrade.name}-next-p`)
+        upgradeDiv.style.cssText = `border-color: white`;
+        nextLevelDiv.style.cssText = `background-color: #2c2c2c; font-weight: normal;`;
+        nextLevelP.innerHTML = `+${matchedUpgrade.increase} quacks per click`
+    })
+    relic.innerHTML = Math.ceil(Math.sqrt(parsedQuack - 999999)/300)
+    qpc = 1
+    qps = 0
+    parsedQuack = 0
+    duck.innerHTML = parsedQuack
+}
+
 setInterval(() => 
 {
     parsedQuack += qps / 10
-    duck.innerHTML = Math.round(parsedQuack)
+    duck.innerHTML = nf(parsedQuack)
     qpcText.innerHTML = Math.round(qpc)
     qpsText.innerHTML = Math.round(qps)
     bgm.play()
+
+    if(parsedQuack >= 1_000_000)
+    {
+        prestigeButton.style.display = "block"
+    }
+    else
+    {
+        prestigeButton.style.display = "none"
+    }
 }, 100)
 
 skillsNavButton.addEventListener("click", function() {
@@ -203,4 +240,5 @@ window.buyUpgrade = buyUpgrade
 window.save = save
 window.load = load
 window.mute = mute
+window.prestige = prestige 
 

@@ -67,6 +67,9 @@
 
 
         <div class="util-buttons">
+            <button class="util-button prestige-button" onclick="prestige()">
+                Prestige 
+            </button>
             <button class="util-button" onclick="save()">
                 Save
             </button>
@@ -77,10 +80,14 @@
                 Mute
             </button>
         </div>
+
+        <div class="relic">
+            Relic: <span id="relic">0</span>
+        </div>
     </section>
 
     <script type="module" src="index.js"></script>
-    <script type="module" src="Constants/skills.js"></script>
-    <script type="module" src="Constants/artifacts.js"></script>
+    <script type="module" src="skills.js"></script>
+    <script type="module" src="artifacts.js"></script>
 </body>
 </html>

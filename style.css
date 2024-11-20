@@ -237,6 +237,15 @@ body {
 }
 
 
+.relic
+{
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    font-size: 20px;
+    font-weight: 600;
+}
+
 .fade-up {
     animation: fade-up 1s;
 }
